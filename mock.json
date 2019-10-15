@@ -1,0 +1,27 @@
+{
+  "name": "Test Server",
+  "date": "15 October, 2019",
+  "routes": [
+    {
+      "name": "Find Book Details",
+      "path":"/api/books",
+      "request": {
+        "method": "post",
+        "header": {
+          "api_key": "qwerty123456"
+        },
+        "body": {
+          "ebook_id": 12345
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": 1,
+          "book_name": "Sample Book One",
+          "price": 123
+        }
+      }
+    }
+  ]
+}

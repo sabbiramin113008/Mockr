@@ -1,0 +1,12 @@
+/.idea/
+/__pycache__/
+__pycache__
+__pycache__/
+.virtualenvironment
+.virtualenvironment/
+*.pyc
+/info
+/venv
+/build
+/mocker.egg-info
+/dist
