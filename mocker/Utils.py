@@ -74,6 +74,7 @@ class Explore(object):
                 res_body = {}
 
             db[str(index)] = {"request": req_body, "response": res_body}
+
         tem_about_context = {
             "project_name": self.contents["name"],
             "date": self.contents["date"]
