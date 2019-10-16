@@ -11,7 +11,7 @@ import sys
 
 choices = ["generate", ]
 
-from mocker import generate
+from mockr import generate
 
 
 def main():

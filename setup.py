@@ -10,14 +10,14 @@ email: sabbir@rokomari.com, sabbiramin.cse11ruet@gmail.com
 from setuptools import setup
 
 setup(
-    name='mocker',
+    name='mockr',
     author='S.M. Sabbir Amin',
     author_email='<sabbiramin.cse11ruet@gmail.com>,<sabbir@rokomari.com',
     version='1.1.0',
     description='A RESTful Mock Server Generator',
     # packages=find_packages(),
-    packages=["mocker"],
-    entry_points={"console_scripts": ["mocker = mocker.__main__:main"]},
+    packages=["mockr"],
+    entry_points={"console_scripts": ["mockr = mockr.__main__:main"]},
     license='MIT',
     install_requires=[
         # 'requests',
