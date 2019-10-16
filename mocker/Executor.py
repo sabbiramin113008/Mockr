@@ -15,7 +15,10 @@ def generate():
     explore = Explore(dir_name=dir_name)
     content = explore.read_file()
     if content:
-        response = explore.response_builder()
+        response, db = explore.response_builder()
+
+        print("db:", db)
+        explore.write_db(db)
         explore.write_file(response)
         print(response)
 

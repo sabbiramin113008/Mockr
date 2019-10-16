@@ -1,0 +1,22 @@
+{
+  "0": {
+    "request": {
+      "ebook_id": 12345
+    },
+    "response": {
+      "status": 1,
+      "book_name": "Sample Book One",
+      "price": 123
+    }
+  },
+  "1": {
+    "request": {
+      "author_id": 2345
+    },
+    "response": {
+      "status": 1,
+      "author_name": "Mr. Author",
+      "books": 31
+    }
+  }
+}

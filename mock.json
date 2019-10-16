@@ -3,10 +3,10 @@
   "date": "15 October, 2019",
   "routes": [
     {
-      "name": "Find Book Details",
+      "route_name": "Find Book Details",
       "path":"/api/books",
+      "method": "post",
       "request": {
-        "method": "post",
         "header": {
           "api_key": "qwerty123456"
         },
@@ -20,6 +20,23 @@
           "status": 1,
           "book_name": "Sample Book One",
           "price": 123
+        }
+      }
+    },{
+      "route_name":"Find Author Details",
+      "path":"/api/authors",
+      "method":"POST",
+      "request":{
+        "body":{
+          "author_id":2345
+        }
+      },
+      "response":{
+        "status":200,
+        "body":{
+          "status":1,
+          "author_name":"Mr. Author",
+          "books":31
         }
       }
     }
