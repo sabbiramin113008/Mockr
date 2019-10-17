@@ -1,29 +1,3 @@
-
-# -*- coding: utf-8 -*-
-"""
-
-author: S.M. Sabbir Amin
-project_name: Test Server
-date: 15 October, 2019
-
-"""
-
-
-import json
-import codecs
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-app.secret_key = 'YourDummySecretKeyIsHere'
-with codecs.open("db.json","r","utf-8") as f:
-    db = json.load(f)
-
-@app.route('/')
-@app.route('/docs')
-@app.route('/index')
-def index():
-    return """
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -1088,68 +1062,41 @@ https://prismjs.com/download.html#themes=prism-okaidia&languages=json+python */
         <div class="content">
             <header><h2>Mock Test API</h2></header>
             <section class="resource-group">
-
-
-
-<div class="resource">
-                    <h3 class="resource-heading">find_book_details</h3>
-                    <p>find_book_details</p>
+                <!--<h3 class="resource-heading">All the APIs Are In Python</h3>-->
+                <div class="resource">
+                    <h3 class="resource-heading">Find Book Details</h3>
+                    <p>Get the details of a Book</p>
                     <div class="action get">
                         <h4 class="action-heading">
-                            <div class="name">find_book_details</div>
-                            <a href="#" class="method post">POST</a>
+                            <div class="name">Find Book Details</div>
+                            <a href="#" class="method get">GET</a>
                             <code class="uri">/api/books</code>
                         </h4>
                         <h4>Example URL</h4>
                         <div class="definition">
-                            <span class="method post">POST</span>&nbsp;<span class="uri">
+                            <span class="method get">GET</span>&nbsp;<span class="uri">
                             <span class="hostname">http://localhost:3000</span>
                             /api/books</span>
                         </div>
                         <div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong>
                             <div class="inner">
-                            <pre><code class="language-json">{"status": 1, "book_name": "Sample Book One", "price": 123}</code></pre>
+                            <pre><code class="language-json">
+            {
+                "status": 1,
+                "book_name": "Sample Book One",
+                "price": 123
+            }</code></pre>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-<div class="resource">
-                    <h3 class="resource-heading">find_author_details</h3>
-                    <p>find_author_details</p>
-                    <div class="action get">
-                        <h4 class="action-heading">
-                            <div class="name">find_author_details</div>
-                            <a href="#" class="method post">POST</a>
-                            <code class="uri">/api/authors</code>
-                        </h4>
-                        <h4>Example URL</h4>
-                        <div class="definition">
-                            <span class="method post">POST</span>&nbsp;<span class="uri">
-                            <span class="hostname">http://localhost:3000</span>
-                            /api/authors</span>
-                        </div>
-                        <div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong>
-                            <div class="inner">
-                            <pre><code class="language-json">{"status": 1, "author_name": "Mr. Author", "books": 31}</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-</section>
+            </section>
         </div>
     </div>
 
 </div>
 <script>
-    
-   /* PrismJS 1.17.1
+    /* PrismJS 1.17.1
      https://prismjs.com/download.html#themes=prism-okaidia&languages=json+python */
     var _self = "undefined" != typeof window ? window : "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {},
         Prism = function (c) {
@@ -1339,8 +1286,8 @@ https://prismjs.com/download.html#themes=prism-okaidia&languages=json+python */
         }(_self);
     "undefined" != typeof module && module.exports && (module.exports = Prism), "undefined" != typeof global && (global.Prism = Prism);
     Prism.languages.json = {
-        property: {pattern: /"(?:\\.|[^\"\\r\\n])*"(?=\s*:)/, greedy: !0},
-        string: {pattern: /"(?:\.|[^\\"\r\n])*"(?!\s*:)/, greedy: !0},
+        property: {pattern: /"(?:\\.|[^\\"\r\n])*"(?=\s*:)/, greedy: !0},
+        string: {pattern: /"(?:\\.|[^\\"\r\n])*"(?!\s*:)/, greedy: !0},
         comment: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,
         number: /-?\d+\.?\d*(e[+-]?\d+)?/i,
         punctuation: /[{}[\],]/,
@@ -1351,33 +1298,3 @@ https://prismjs.com/download.html#themes=prism-okaidia&languages=json+python */
 </script>
 </body>
 </html>
-"""
-    
-
-
-@app.route('/api/books',methods=['POST'])
-def find_book_details():
-    if request.method == 'POST':
-    
-        
-        try:
-            key = "qwerty123456"
-            key = request.headers["api_key"]
-        except KeyError:
-            return jsonify({"flag":"KEY_MISSING"})
-        response = db["0"]["response"]
-        return jsonify(response),200
-    
-@app.route('/api/authors',methods=['POST'])
-def find_author_details():
-    if request.method == 'POST':
-    
-        response = db["1"]["response"]
-        return jsonify(response),200
-    
-
-app.run(
-    port=8000,
-    host="localhost",
-    debug=True
-    )

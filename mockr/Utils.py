@@ -80,11 +80,12 @@ class Explore(object):
             "date": self.contents["date"]
         }
         tem_about_response = Template(tem_about).render(tem_about_context)
-        tem_header_response = Template(tem_header).render()
+
         tem_footer_response = Template(tem_footer).render()
 
         routes = ''''''
         headers_check = ''''''
+        html_contents = ''''''
         for index, route in enumerate(self.contents["routes"]):
             path = route["path"]
             method = str(route["method"]).upper()
@@ -118,9 +119,32 @@ class Explore(object):
                 status=status
             )
             routes = routes + r_response
+
+            r_html_content_response = Template(tem_api_content).render(
+                route_name=route_name,
+                method_lower=str(method).lower(),
+                method_upper=str(method).upper(),
+                path=path,
+                res_body=str(route["response"]["body"]).replace("'","\""),
+                status=status
+            )
+            html_contents = html_contents + r_html_content_response
+
             print("routes: ", routes)
         print("Final Routes:", routes)
         print("Final Headers Check:", headers_check)
+
+        html_content_response = Template(tem_html).render(
+            html_header=tem_html_header,
+            html_contents=html_contents,
+            html_footer=tem_html_footer
+
+        )
+        print("Final HTML Chech:", html_content_response)
+
+        tem_header_response = Template(tem_header).render(
+            html=html_content_response
+        )
 
         tem_final_response = Template(tem_final).render(
             tem_about=tem_about_response,
