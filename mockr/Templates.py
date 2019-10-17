@@ -52,10 +52,15 @@ def index():
 tem_route = '''
 @app.route('{{path}}',methods=['{{method}}'])
 def {{route_name}}():
-    if request.method=='{{method}}':
+    if request.method == '{{method}}':
+    {% if h %}
+        {{headers_check}}
         response = db["{{rid}}"]["response"]
         return jsonify(response),{{status}}
-
+    {% else %}
+        response = db["{{rid}}"]["response"]
+        return jsonify(response),{{status}}
+    {% endif %}
 '''
 
 tem_routes = '''
@@ -64,7 +69,13 @@ tem_routes = '''
 
 '''
 
-
+tem_headers_check = '''
+        try:
+            key = "{{key_val}}"
+            key = request.headers["{{key_name}}"]
+        except KeyError:
+            return jsonify({"flag":"KEY_MISSING"})
+'''
 
 
 

@@ -84,15 +84,35 @@ class Explore(object):
         tem_footer_response = Template(tem_footer).render()
 
         routes = ''''''
+        headers_check = ''''''
         for index, route in enumerate(self.contents["routes"]):
             path = route["path"]
             method = str(route["method"]).upper()
             route_name = str(route["route_name"]).rstrip().lstrip().replace(" ", "_").lower()
             status = route["response"]["status"]
+            try:
+                header_dict = route["request"]["header"]
+                for k, v in header_dict.items():
+                    key_name = str(k)
+                    key_val = str(v)
+                    print("Value:", key_val)
+
+                    headers_check_response = Template(tem_headers_check).render(
+                        key_name=key_name,
+                        key_val=key_val
+                    )
+                    headers_check = headers_check + headers_check_response
+
+                h = 1
+            except:
+                header_dict = {}
+                h = 0
 
             r_response = Template(tem_route).render(
                 path=path,
                 method=method,
+                h=h,
+                headers_check=headers_check,
                 route_name=route_name,
                 rid=str(index),
                 status=status
@@ -100,6 +120,7 @@ class Explore(object):
             routes = routes + r_response
             print("routes: ", routes)
         print("Final Routes:", routes)
+        print("Final Headers Check:", headers_check)
 
         tem_final_response = Template(tem_final).render(
             tem_about=tem_about_response,
