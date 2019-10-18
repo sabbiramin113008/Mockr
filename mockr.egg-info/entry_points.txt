@@ -1,3 +1,0 @@
-[console_scripts]
-mockr = mockr.__main__:main
-
