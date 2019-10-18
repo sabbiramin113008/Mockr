@@ -5,8 +5,8 @@
     1. It is not a fast to write a mock server, and let the 
         mobile or Web App Team to start building the product while API is not yet
         baked. So let them work on the mock Request-Response while you build a Real one.
-    2. `Mockr` generates a Fully Functional Web Server with 
-        a `workable` Documentation.
+    2. "Mockr" generates a Fully Functional Web Server with 
+        a "workable" Documentation.
     3. I know, there are other alternative in the market Like Apiary or other,
         but I want to build of my own.
     4. I need to spin up mock server several times to try new projects as
@@ -17,7 +17,13 @@
 
 ### How to install
     It is in pure Python, so no extra batteries are needed but for a Simple one.
-    You need to install `Flask` via PIP. 
+    You need to install "Flask" via PIP. 
+    
+    So let's install Flask
+```python
+pip install Flask
+
+```
     
 First Clone this Repository.
 ```bash
@@ -40,33 +46,33 @@ The package should be installed on your system.
 
 ### How To Use
 
-`Mockr` is also a install-able CLI app that can be run from any where.
+"Mockr" is also a install-able CLI app that can be run from any where.
  To Generate a mock RESTful Python Flask WEb Server, we need one thing.
  
- #### Write a `mock.json` File
- You need to have a API description file named `mock.json` that contains
+ #### Write a "mock.json" File
+ You need to have a API description file named "mock.json" that contains
  details about the Routes, their HTTP verbs ( GET, POST, PUT, DELETE etc),
  the Request Header ( if any), Request Body and Request Params or Query 
  Parameters. Also routes must contain the Response Object with Response
- Status Code, Response Body etc. A sample `mock.json` file can be found in the 
- `examples` Folder in this Repository.
+ Status Code, Response Body etc. A sample "mock.json" file can be found in the 
+ "examples" Folder in this Repository.
  
 #### Generating Python Web Server
- Open up the Terminal in the directory where you put your `mock.json`
+ Open up the Terminal in the directory where you put your "mock.json"
  File.
  
  Now type 
  ```python
 mockr generate
 ```
-Now You will be prompted to Enter the Location of the `mock.json` File.
+Now You will be prompted to Enter the Location of the "mock.json" File.
 
 ```bash
 λ mockr generate
 Enter The Mock Dir Name: F:\projektus\py\mocker\examples
 ```
 
-A `server.py` and a `db.json` file will be generated.
+A "server.py" and a "db.json" file will be generated on that directory.
 
 ### Starting the Mock Server
 As it is about Mock Serving, we can use Python to spin up the server. 
@@ -78,7 +84,7 @@ python server.py
 ```
 A Server will be Launched in the Localhost at PORT: 8000
 
-Open up any browser and Go to `localhost:8000/docs`. You will find a decent 
+Open up any browser and Go to "localhost:8000/docs". You will find a decent 
 API documentation up there. 
 
 For Checking the API Responses, Use any HTTP Client like Insomnia or Postman. 
