@@ -90,6 +90,11 @@ class Explore(object):
             path = route["path"]
             method = str(route["method"]).upper()
             route_name = str(route["route_name"]).rstrip().lstrip().replace(" ", "_").lower()
+            route_name_ori = str(route["route_name"])
+            try:
+                route_details = route["details"]
+            except KeyError:
+                route_details = ""
             status = route["response"]["status"]
             try:
                 header_dict = route["request"]["header"]
@@ -122,10 +127,12 @@ class Explore(object):
 
             r_html_content_response = Template(tem_api_content).render(
                 route_name=route_name,
+                route_name_ori=route_name_ori,
+                details=route_details,
                 method_lower=str(method).lower(),
                 method_upper=str(method).upper(),
                 path=path,
-                res_body=str(route["response"]["body"]).replace("'","\""),
+                res_body=str(route["response"]["body"]).replace("'", "\""),
                 status=status
             )
             html_contents = html_contents + r_html_content_response

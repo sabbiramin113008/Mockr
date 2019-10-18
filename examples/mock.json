@@ -4,6 +4,7 @@
   "routes": [
     {
       "route_name": "Find Book Details",
+      "details":"Find the Details of Book By Id",
       "path":"/api/books",
       "method": "post",
       "request": {
