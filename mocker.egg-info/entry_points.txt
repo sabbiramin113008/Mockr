@@ -1,0 +1,3 @@
+[console_scripts]
+mocker = mocker.__main__:main
+
