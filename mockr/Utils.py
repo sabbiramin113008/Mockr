@@ -21,6 +21,7 @@ class Explore(object):
         self.source_file = f"{self.dir_name}\mock.json"
         self.target_file_name = f"{self.dir_name}/server.py"
         self.db_file_name = f"{self.dir_name}/db.json"
+        self.api_doc_file_name = f"{self.dir_name}/api_doc.html"
         self.contents = None
 
     def read_file(self):
@@ -34,8 +35,14 @@ class Explore(object):
             print("Error:", e)
             return None
 
-    def write_file(self, response):
-        with codecs.open(self.target_file_name, "w", "utf-8") as file_writer:
+    def write_file(self, response, target_file_type=None):
+        gen_target_file = None
+        if target_file_type:
+            if target_file_type == str("api_doc"):
+                gen_target_file = self.api_doc_file_name
+        else:
+            gen_target_file = self.target_file_name
+        with codecs.open(gen_target_file, "w", "utf-8") as file_writer:
             file_writer.write(response)
 
     def write_db(self, response):
@@ -61,7 +68,7 @@ class Explore(object):
         return f_response
         # return env.from_string(tem_about).render(context)
 
-    def response_builder(self):
+    def build_py_and_doc(self):
         db = {}
         for index, route in enumerate(self.contents["routes"]):
             try:
@@ -160,3 +167,64 @@ class Explore(object):
             tem_footer=tem_footer_response
         )
         return tem_final_response, db
+
+    def build_doc(self):
+        headers_check = ''''''
+        html_contents = ''''''
+        for index, route in enumerate(self.contents["routes"]):
+            path = route["path"]
+            method = str(route["method"]).upper()
+            route_name = str(route["route_name"]).rstrip().lstrip().replace(" ", "_").lower()
+            route_name_ori = str(route["route_name"])
+            try:
+                route_details = route["details"]
+            except KeyError:
+                route_details = ""
+            status = route["response"]["status"]
+            try:
+                header_dict = route["request"]["header"]
+                for k, v in header_dict.items():
+                    key_name = str(k)
+                    key_val = str(v)
+                    print("Value:", key_val)
+
+                    headers_check_response = Template(tem_headers_check).render(
+                        key_name=key_name,
+                        key_val=key_val
+                    )
+                    headers_check = headers_check + headers_check_response
+
+                h = 1
+            except:
+                header_dict = {}
+                h = 0
+
+            r_response = Template(tem_route).render(
+                path=path,
+                method=method,
+                h=h,
+                headers_check=headers_check,
+                route_name=route_name,
+                rid=str(index),
+                status=status
+            )
+
+            r_html_content_response = Template(tem_api_content).render(
+                route_name=route_name,
+                route_name_ori=route_name_ori,
+                details=route_details,
+                method_lower=str(method).lower(),
+                method_upper=str(method).upper(),
+                path=path,
+                res_body=str(route["response"]["body"]).replace("'", "\""),
+                status=status
+            )
+            html_contents = html_contents + r_html_content_response
+        html_content_response = Template(tem_html).render(
+            html_header=tem_html_header,
+            html_contents=html_contents,
+            html_footer=tem_html_footer
+
+        )
+        print("Final HTML Chech:", html_content_response)
+        return html_content_response
